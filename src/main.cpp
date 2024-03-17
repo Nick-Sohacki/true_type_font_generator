@@ -149,7 +149,7 @@ int main(int NumArgs, char **Args)
                 // Allocate the bitmap.
                 uint8_t *Bitmap = (uint8_t *)calloc(BitmapSize, 1);
 
-                // Fill bitmap with glyphs while also getting the texture coordinates for each character.
+                // Fill bitmap with glyphs.
                 for (char I = ASCII_START; I <= ASCII_END; I++)
                 {
                     // Calculate width and height of character.
