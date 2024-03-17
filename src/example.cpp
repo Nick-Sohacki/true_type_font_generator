@@ -1,3 +1,40 @@
+// Prevent the compiler from adding any padding to the following structs.
+#pragma pack(push, 1)
+
+// Define the data for rendering a single character.
+struct character_info
+{
+    // The bounding box of the character; simply add the current position to this to get the rectangle to draw.
+    int BoundingBoxMinX;
+    int BoundingBoxMinY;
+    int BoundingBoxMaxX;
+    int BoundingBoxMaxY;
+
+    // The pixel coordinates of the character in the image file.
+    int TextureMinX;
+    int TextureMinY;
+    int TextureMaxX;
+    int TextureMaxY;
+
+    // The amount to advance to the next character.
+    float XAdvance;
+};
+
+// Define the data for rendering the font.
+struct font_info
+{
+    // The size of the font.
+    int Size;
+
+    // The amount to advance to the next row/line of text.
+    float YAdvance;
+
+    // Array of character data. Note that while we only use 96 characters, we still define it to be the entire 128 characters for simple access.
+    character_info Characters[128];
+};
+
+#pragma pack(pop)
+
 int main()
 {
     // Declare the font info data.
