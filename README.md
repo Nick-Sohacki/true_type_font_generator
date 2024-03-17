@@ -18,4 +18,4 @@ ttf_generator times 24
 This tool will output two files: an image file containing all ASCII characters (i.e. "times24.tga") and a data file containing render data (i.e. "times24.info"). The render data file simply contains the vertex coordinates and UV coordinates for each character such that it can easily passed to a low-level graphics API.
 
 ## Using the Output Files
-Refer to "example.cpp" in the "src" directory to see how to use the output files in your own program to render text.
+Refer to [example.cpp](https://github.com/Nick-Sohacki/true_type_font_generator/blob/master/src/example.cpp) in the "src" directory to see how to use the output files in your own program to render text.
