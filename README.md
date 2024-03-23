@@ -1,5 +1,42 @@
 ## Overview
-This tool allows you to render text in a low-level graphics application (i.e. OpenGL) in a fast and easy way. It uses STB's image and TTF libraries.
+This tool allows you to render text in a low-level graphics application (i.e. OpenGL) in a fast and easy way. Given a TTF file as input, it generates two files:
+1. An image file containing all ASCII characters, that looks like the following: ![alt text](https://github.com/Nick-Sohacki/true_type_font_generator/blob/master/res/comic36.png)
+2. A binary file containing the render data for each character; the structure for this data is the following:
+```
+// Define the data for rendering a single character.
+struct character_info
+{
+    // The bounding box of the character; simply add the current position to this to get the rectangle to draw.
+    int BoundingBoxMinX;
+    int BoundingBoxMinY;
+    int BoundingBoxMaxX;
+    int BoundingBoxMaxY;
+
+    // The pixel coordinates of the character in the image file.
+    int TextureMinX;
+    int TextureMinY;
+    int TextureMaxX;
+    int TextureMaxY;
+
+    // The amount to advance to the next character.
+    float XAdvance;
+};
+
+// Define the data for rendering the font.
+struct font_info
+{
+    // The size of the font.
+    int Size;
+
+    // The amount to advance to the next row/line of text.
+    float YAdvance;
+
+    // Array of character data. Note that while we only use 96 characters, we still define it to be the entire 128 characters for simple access.
+    character_info Characters[128];
+};
+```
+
+Refer to [example.cpp](https://github.com/Nick-Sohacki/true_type_font_generator/blob/master/src/example.cpp) to see how to use these files in your application.
 
 ## Usage
 ```
@@ -14,9 +51,6 @@ ttf_generator times 24
 ```
 "times" is the name of the Times New Roman TTF file in C:/Windows/Fonts/.
 
-## Output Files
-This tool will output two files: an image file containing all ASCII characters (i.e. "times24.tga") and a data file containing render data (i.e. "times24.info"). The image file looks like the following: ![alt text](https://github.com/Nick-Sohacki/true_type_font_generator/blob/master/res/comic36.png)
-The render data file simply contains the vertex coordinates and UV coordinates for each character such that it can easily passed to a low-level graphics API.
+## Libraries Used
 
-## Using the Output Files
-Refer to [example.cpp](https://github.com/Nick-Sohacki/true_type_font_generator/blob/master/src/example.cpp) in the "src" directory to see how to use the output files in your own program to render text.
+This project uses STB's TTF and image write libraries.
